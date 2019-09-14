@@ -15,4 +15,6 @@ D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\s
 D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\RFC3339DateFormat.java
 D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\configuration\JacksonConfiguration.java
 D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\model\ProductoRsType.java
+D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\repository\ProductoRepository.java
+D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\model\Producto_db.java
 D:\Users\Usuario\Documents\sts-bundle\proyectos\spring-server\src\main\java\io\swagger\api\ApiOriginFilter.java

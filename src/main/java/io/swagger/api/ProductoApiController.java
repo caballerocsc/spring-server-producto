@@ -3,10 +3,14 @@ package io.swagger.api;
 import io.swagger.model.PatchRequest;
 import io.swagger.model.Producto;
 import io.swagger.model.ProductoRsType;
+import io.swagger.model.Producto_db;
+import io.swagger.repository.ProductoRepository;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,9 @@ import java.util.List;
 
 @Controller
 public class ProductoApiController implements ProductoApi {
+	
+	@Autowired
+	private ProductoRepository productoRepository;
 
 	private static final Logger log = LoggerFactory.getLogger(ProductoApiController.class);
 
@@ -73,8 +80,9 @@ public class ProductoApiController implements ProductoApi {
 //                return new ResponseEntity<ProductoRsType>(HttpStatus.INTERNAL_SERVER_ERROR);
 //            }
 //        }
-
+		Producto_db prod = productoRepository.findOne(Integer.parseInt(descripcionProducto));
 		System.out.println("pruebita:"+descripcionProducto);
+		System.out.println("to_string: "+prod.toString());
 		return new ResponseEntity<ProductoRsType>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
