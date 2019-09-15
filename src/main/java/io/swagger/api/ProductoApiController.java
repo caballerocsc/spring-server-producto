@@ -67,7 +67,7 @@ public class ProductoApiController implements ProductoApi {
 		return new ResponseEntity<ProductoRsType>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
-	public ResponseEntity<ProductoRsType> conultarProductoPorDescripcion(
+	public ResponseEntity<Producto_db> conultarProductoPorDescripcion(
 			@ApiParam(value = "Cabecera estándar", required = true) @RequestHeader(value = "headerRq", required = true) String headerRq,
 			@ApiParam(value = "sb2s1", required = true) @RequestHeader(value = "serviceID", required = true) String serviceID,
 			@NotNull @ApiParam(value = "Descripcion del producto a consultar", required = true) @Valid @RequestParam(value = "descripcionProducto", required = true) String descripcionProducto) {
@@ -83,7 +83,7 @@ public class ProductoApiController implements ProductoApi {
 		Producto_db prod = productoRepository.findOne(Integer.parseInt(descripcionProducto));
 		System.out.println("pruebita:"+descripcionProducto);
 		System.out.println("to_string: "+prod.toString());
-		return new ResponseEntity<ProductoRsType>(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.ok().body(prod);
 	}
 
 	public ResponseEntity<ProductoRsType> conultarProductoPorId(
@@ -124,23 +124,11 @@ public class ProductoApiController implements ProductoApi {
 		return new ResponseEntity<ProductoRsType>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
-	public ResponseEntity<ProductoRsType> registrarProducto(
+	public Producto_db registrarProducto(
 			@ApiParam(value = "Cabecera estándar", required = true) @RequestHeader(value = "headerRq", required = true) String headerRq,
 			@ApiParam(value = "soms1", required = true) @RequestHeader(value = "serviceID", required = true) String serviceID,
-			@ApiParam(value = "Producto a registrar", required = true) @Valid @RequestBody Producto producto) {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			try {
-				return new ResponseEntity<ProductoRsType>(objectMapper.readValue(
-						"{  \"datosBasicos\" : {    \"datosdelObjeto\" : 6  },  \"status\" : {    \"statusDesc\" : \"statusDesc\",    \"statusCode\" : 0  }}",
-						ProductoRsType.class), HttpStatus.NOT_IMPLEMENTED);
-			} catch (IOException e) {
-				log.error("Couldn't serialize response for content type application/json", e);
-				return new ResponseEntity<ProductoRsType>(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		}
-
-		return new ResponseEntity<ProductoRsType>(HttpStatus.NOT_IMPLEMENTED);
+			@ApiParam(value = "Producto a registrar", required = true) @Valid @RequestBody Producto_db producto) {
+		return productoRepository.save(producto);
 	}
 
 }

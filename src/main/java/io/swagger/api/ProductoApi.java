@@ -8,6 +8,7 @@ package io.swagger.api;
 import io.swagger.model.PatchRequest;
 import io.swagger.model.Producto;
 import io.swagger.model.ProductoRsType;
+import io.swagger.model.Producto_db;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -39,7 +40,7 @@ public interface ProductoApi {
     ResponseEntity<ProductoRsType> actualizarProductoPorId(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "sb2s1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@ApiParam(value = "Id del producto a inactivar",required=true) @PathVariable("idProducto") Integer idProducto,@ApiParam(value = "" ,required=true )  @Valid @RequestBody PatchRequest jsonPatch);
 
 
-    @ApiOperation(value = "Consultar Producto por Descripcion", nickname = "conultarProductoPorDescripcion", notes = "Retorna un producto", response = ProductoRsType.class, tags={ "Producto", })
+    @ApiOperation(value = "Consultar Producto por Descripcion", nickname = "conultarProductoPorDescripcion", notes = "Retorna un producto", response = Producto_db.class, tags={ "Producto", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "EXITO", response = ProductoRsType.class),
         @ApiResponse(code = 400, message = "Bad request", response = ProductoRsType.class),
@@ -47,7 +48,7 @@ public interface ProductoApi {
     @RequestMapping(value = "/producto/consultarPorDescripcion",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<ProductoRsType> conultarProductoPorDescripcion(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "sb2s1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@NotNull @ApiParam(value = "Descripcion del producto a consultar", required = true) @Valid @RequestParam(value = "descripcionProducto", required = true) String descripcionProducto);
+    ResponseEntity<Producto_db> conultarProductoPorDescripcion(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "sb2s1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@NotNull @ApiParam(value = "Descripcion del producto a consultar", required = true) @Valid @RequestParam(value = "descripcionProducto", required = true) String descripcionProducto);
 
 
     @ApiOperation(value = "Consultar Producto por ID", nickname = "conultarProductoPorId", notes = "Retorna un producto", response = ProductoRsType.class, tags={ "Producto", })
@@ -72,15 +73,15 @@ public interface ProductoApi {
     ResponseEntity<ProductoRsType> conultarProductoPorNombre(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "sb2s1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@NotNull @ApiParam(value = "Nombre del producto a consultar", required = true) @Valid @RequestParam(value = "nombreProducto", required = true) String nombreProducto);
 
 
-    @ApiOperation(value = "Registrar un Producto", nickname = "registrarProducto", notes = "", response = ProductoRsType.class, tags={ "Producto", })
+    @ApiOperation(value = "Registrar un Producto", nickname = "registrarProducto", notes = "", response = Producto_db.class, tags={ "Producto", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "EXITO", response = ProductoRsType.class),
-        @ApiResponse(code = 400, message = "Bad request", response = ProductoRsType.class),
-        @ApiResponse(code = 404, message = "Not found", response = ProductoRsType.class) })
+        @ApiResponse(code = 200, message = "EXITO", response = Producto_db.class),
+        @ApiResponse(code = 400, message = "Bad request", response = Producto_db.class),
+        @ApiResponse(code = 404, message = "Not found", response = Producto_db.class) })
     @RequestMapping(value = "/producto",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<ProductoRsType> registrarProducto(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "soms1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@ApiParam(value = "Producto a registrar" ,required=true )  @Valid @RequestBody Producto producto);
+    Producto_db registrarProducto(@ApiParam(value = "Cabecera estándar" ,required=true) @RequestHeader(value="headerRq", required=true) String headerRq,@ApiParam(value = "soms1" ,required=true) @RequestHeader(value="serviceID", required=true) String serviceID,@ApiParam(value = "Producto a registrar" ,required=true )  @Valid @RequestBody Producto_db producto);
 
 }
