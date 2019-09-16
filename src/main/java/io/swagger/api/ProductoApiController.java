@@ -1,9 +1,11 @@
 package io.swagger.api;
 
+import io.swagger.model.ParametrosDeSalidaType;
 import io.swagger.model.PatchRequest;
 import io.swagger.model.Producto;
 import io.swagger.model.ProductoRsType;
 import io.swagger.model.Producto_db;
+import io.swagger.model.StatusType;
 import io.swagger.repository.ProductoRepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +33,7 @@ import java.util.List;
 
 @Controller
 public class ProductoApiController implements ProductoApi {
-	
+
 	@Autowired
 	private ProductoRepository productoRepository;
 
@@ -83,6 +85,10 @@ public class ProductoApiController implements ProductoApi {
 		Producto_db prod = productoRepository.findOne(Integer.parseInt(descripcionProducto));
 		System.out.println("pruebita:"+descripcionProducto);
 		System.out.println("to_string: "+prod.toString());
+		ProductoRsType rs = new ProductoRsType();
+		rs.setStatus(new StatusType(200,"OK"));
+		rs.setDatosBasicos(new ParametrosDeSalidaType());
+//		ResponseEntity.ok().body(body)
 		return ResponseEntity.ok().body(prod);
 	}
 

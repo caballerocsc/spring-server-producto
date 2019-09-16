@@ -23,6 +23,11 @@ public class StatusType   {
   @JsonProperty("statusDesc")
   private String statusDesc = null;
 
+  public StatusType(Integer pStatus, String pDesc) {
+	  this.statusCode = pStatus;
+	  this.statusDesc = pDesc;
+  }
+  
   public StatusType statusCode(Integer statusCode) {
     this.statusCode = statusCode;
     return this;
